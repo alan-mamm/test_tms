@@ -71,7 +71,7 @@ export function AvailablePanel({ onSelect, refreshKey }) {
       return;
     }
 
-    setAddStatus({ type: "pending", text: `ID ${num} добавлен в очередь (отправка через ~10 сек)…` });
+    setAddStatus({ type: "pending", text: `ID ${num} добавлен в очередь (отправка через -10 сек)…` });
     setNewId("");
 
     try {
