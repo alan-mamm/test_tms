@@ -1,0 +1,414 @@
+
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap");
+
+
+:root {
+  --bg: #0f0f0f;
+  --surface: #181818;
+  --surface-2: #222222;
+  --border: #2e2e2e;
+  --border-focus: #555;
+  --text: #e8e8e8;
+  --text-dim: #888;
+  --text-mono: "JetBrains Mono", monospace;
+  --text-ui: "Inter", sans-serif;
+  --accent: #f0c040;
+  --accent-dim: rgba(240, 192, 64, 0.12);
+  --green: #4caf78;
+  --red: #e05555;
+  --blue: #5599ee;
+  --radius: 4px;
+  --transition: 150ms ease;
+}
+
+/* ---------------------------------------------------------------------------
+   Сброс и базовые стили
+   --------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--text-ui);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ---------------------------------------------------------------------------
+   Шапка
+   --------------------------------------------------------------------------- */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.app-title {
+  font-family: var(--text-mono);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--accent);
+}
+
+.app-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-family: var(--text-mono);
+}
+
+/* ---------------------------------------------------------------------------
+   Двухколоночная раскладка
+   --------------------------------------------------------------------------- */
+.panels {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  gap: 0;
+}
+
+.panels-divider {
+  width: 1px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Панель (общая)
+   --------------------------------------------------------------------------- */
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.panel-selected {
+  background: #141820;
+}
+
+.panel-header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.panel-title {
+  font-family: var(--text-mono);
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.panel-icon {
+  color: var(--accent);
+  font-size: 16px;
+}
+
+.panel-subtitle {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 4px;
+  padding-left: 26px;
+}
+
+/* ---------------------------------------------------------------------------
+   Поисковая строка и добавление
+   --------------------------------------------------------------------------- */
+.search-bar,
+.add-bar {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--text-mono);
+  font-size: 13px;
+  padding: 7px 10px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.input:focus {
+  border-color: var(--border-focus);
+}
+
+.input::placeholder {
+  color: var(--text-dim);
+}
+
+/* Убираем стрелки у number input */
+.input[type="number"]::-webkit-inner-spin-button,
+.input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.btn {
+  padding: 7px 14px;
+  border-radius: var(--radius);
+  font-family: var(--text-mono);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-dim);
+}
+
+.btn-ghost:hover {
+  border-color: var(--border-focus);
+  color: var(--text);
+}
+
+.btn-accent {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-accent:hover {
+  background: rgba(240, 192, 64, 0.22);
+}
+
+/* ---------------------------------------------------------------------------
+   Статус добавления
+   --------------------------------------------------------------------------- */
+.status-badge {
+  margin: 0 16px 2px;
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  font-family: var(--text-mono);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.status-success {
+  background: rgba(76, 175, 120, 0.12);
+  border: 1px solid rgba(76, 175, 120, 0.3);
+  color: var(--green);
+}
+
+.status-error {
+  background: rgba(224, 85, 85, 0.1);
+  border: 1px solid rgba(224, 85, 85, 0.3);
+  color: var(--red);
+}
+
+.status-pending {
+  background: rgba(85, 153, 238, 0.1);
+  border: 1px solid rgba(85, 153, 238, 0.3);
+  color: var(--blue);
+}
+
+/* ---------------------------------------------------------------------------
+   Список элементов
+   --------------------------------------------------------------------------- */
+.list-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.list-container::-webkit-scrollbar {
+  width: 4px;
+}
+.list-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.items-list {
+  list-style: none;
+}
+
+/* Одна строка */
+.item-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-bottom: 1px solid transparent;
+  transition: background var(--transition);
+  gap: 10px;
+}
+
+.item-available {
+  cursor: pointer;
+}
+
+.item-available:hover {
+  background: var(--surface-2);
+  border-bottom-color: var(--border);
+}
+
+.item-available:hover .item-action {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.item-selected {
+  cursor: default;
+}
+
+.item-selected:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.item-busy {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.item-id {
+  font-family: var(--text-mono);
+  font-size: 13px;
+  color: var(--text);
+  flex: 1;
+}
+
+.item-action {
+  font-size: 14px;
+  color: var(--text-dim);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+/* Drag&Drop */
+.drag-handle {
+  font-size: 16px;
+  color: var(--text-dim);
+  cursor: grab;
+  user-select: none;
+  padding: 0 4px;
+  letter-spacing: -2px;
+  flex-shrink: 0;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.item-dragging {
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.item-drag-overlay {
+  background: var(--surface-2);
+  border: 1px solid var(--border-focus);
+  border-radius: var(--radius);
+  padding: 8px 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  font-family: var(--text-mono);
+  gap: 10px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  transition: color var(--transition), background var(--transition);
+  flex-shrink: 0;
+}
+
+.remove-btn:hover {
+  color: var(--red);
+  background: rgba(224, 85, 85, 0.1);
+}
+
+/* ---------------------------------------------------------------------------
+   Вспомогательные состояния
+   --------------------------------------------------------------------------- */
+.sentinel {
+  height: 1px;
+}
+
+.loading-msg,
+.end-msg,
+.empty-msg,
+.error-msg {
+  text-align: center;
+  padding: 16px;
+  font-family: var(--text-mono);
+  font-size: 12px;
+}
+
+.loading-msg {
+  color: var(--text-dim);
+}
+
+.end-msg {
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  padding-top: 12px;
+}
+
+.empty-msg {
+  color: var(--text-dim);
+  padding: 48px 16px;
+}
+
+.error-msg {
+  color: var(--red);
+}
+
+/* ---------------------------------------------------------------------------
+   Адаптивность
+   --------------------------------------------------------------------------- */
+@media (max-width: 700px) {
+  .panels {
+    flex-direction: column;
+  }
+
+  .panels-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  .panel {
+    height: 50vh;
+  }
+}
